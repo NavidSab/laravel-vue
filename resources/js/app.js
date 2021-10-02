@@ -6,8 +6,10 @@
 
 require('./bootstrap');
 import Vue from 'vue'
-
 import Form from 'vform'
+import moment from 'moment'
+import VueProgressBar from 'vue-progressbar'
+
 import { Button, HasError, AlertError,AlertSuccess } from 'vform/src/components/bootstrap5'
 Vue.component(Button.name, Button)
 Vue.component(HasError.name, HasError)
@@ -19,11 +21,35 @@ window.Form = Form;
 
 
 
+Vue.filter('modifyName', function (text) {
+  if (!text) return ''
+  return text.charAt(0).toUpperCase() + text.slice(1)
+})
+
+
+Vue.filter('modifyDate', function (date) {
+  if (!date) return ''
+  return moment(date).format('MMMM Do YYYY');
+})
 
 
 
 
+const options = {
+  color: '#bffaf3',
+  failedColor: '#874b4b',
+  thickness: '5px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  location: 'top',
+  inverse: false
+}
 
+Vue.use(VueProgressBar, options)
 
 
 

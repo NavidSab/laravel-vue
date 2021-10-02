@@ -14,5 +14,9 @@ class UserRepo
             'password' => Hash::make($request->password),
         ]);
     }
+
+    public function all(){
+        return User::orderBy('id')->paginate('10');
+    }
     
 }

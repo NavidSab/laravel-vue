@@ -21,17 +21,18 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Type</th>
+                                    <th>Registered At</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>183</td>
-                                    <td>John Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td>
-                                        <span class="tag tag-success">Approved</span>
-                                    </td>
+                                <tr v-for="user in users" :key="user.id">
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.name | modifyName}}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.type }}</td>
+                                    <td>{{ user.created_at | modifyDate}}</td>
+                                   
                                     <td>
                                         <a href="#">
                                             <i class="fa fa-edit blue"></i>
@@ -131,6 +132,7 @@
                 export default {
                     data() {
                         return {
+                            users :{},
                             form: new Form({
                                 name: '',
                                 email: '',
@@ -143,13 +145,20 @@
                     },
                     methods: {
                         createUser() {
+                            this.$Progress.start();
                             this
                                 .form
                                 .post('api/user');
+                                this.$Progress.finish()
+                        },
+                        loadUser(){
+                            axios
+                            .get('api/user')
+                            .then(({data})=>(this.users = data.data));
                         }
                     },
-                    mounted() {
-                        console.log('Component mounted.')
+                    created() {
+                        this.loadUser(); 
                     }
                 }
             </script>
