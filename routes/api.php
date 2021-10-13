@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::apiResources(['user' => \App\Http\Controllers\API\UserController::class]);
+Route::get('profile', '\App\Http\Controllers\API\UserController@profile');
+Route::get('findUser', '\App\Http\Controllers\API\UserController@search');
+Route::put('profile', '\App\Http\Controllers\API\UserController@updateProfile');
 
-
-Route::apiResources(['user' =>  \App\Http\Controllers\API\UserController::class]);

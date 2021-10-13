@@ -17,6 +17,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::get('invoice', function(){
+    return view('invoice');
+});
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 Route::get("{any}", 'App\Http\Controllers\HomeController@index')->where('any', '.*');
