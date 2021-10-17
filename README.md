@@ -1,5 +1,8 @@
-# laravel-vue
+# Laravel Vue Dashboard
 laravel vue Starter Dashboard 
 
-laravel 8
-vue 3
+Features:
+
+-laravel 8
+-vue 3
+-Adminltd 3
