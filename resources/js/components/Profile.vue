@@ -9,8 +9,6 @@
 }
 
 </style>
-
-
 <template>
     <div class="container">
         <div class="row">
@@ -109,14 +107,14 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password" class="col-sm-12 control-label">Passport (leave empty if not changing)</label>
+                                    <label for="password" class="col-sm-12 control-label">Password (leave empty if not changing)</label>
 
                                     <div class="col-sm-12">
                                     <input type="password"
                                         v-model="form.password"
                                         class="form-control"
                                         id="password"
-                                        placeholder="Passport"
+                                        placeholder="Password"
                                         :class="{ 'is-invalid': form.errors.has('password') }"
                                     >
                                      <has-error :form="form" field="password"></has-error>
@@ -194,12 +192,12 @@
             updateProfile(e){
                 let file = e.target.files[0];
                 let reader = new FileReader();
-
                 let limit = 1024 * 1024 * 2;
                 if(file['size'] > limit){
-                    swal({
+                    swal.fire({
                         type: 'error',
                         title: 'Oops...',
+                        timer: 1500,
                         text: 'You are uploading a large file',
                     })
                     return false;
